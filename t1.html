@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>t1</title>
+    <style>
+        .wb_btn {
+            color: aqua;
+            background: black;
+            font-size: 20px;
+            width: 150px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <p>html调取APP方法</p>
+    <button onclick="WBJSMovieHandle.pushMoviePickerCtrMaxDuration(10.0,100.0)">我要跳转到movie picker ctr</button>
+    <button onclick="WBJSMovieHandle.push(5.0)">我要跳转到movie picker ctr</button>
+    <br>
+    <br>
+    <p>app回调上传进度</p>
+    <div class="wb_btn" onclick="WBJSMovieHandle.test()">我要测试回调</div>
+    <p id="wb-progress">我是上传进度</p>
+    <br>
+    <p>通过js获取app内数据</p>
+    <div class="wb_btn" onclick="getAppUserToken()">我要token</div>
+    <p id="wb-token">我是token</p>
+    <script type="text/javascript">
+        //刷新进度数据
+        function wbProgress(vvv) {  
+            document.getElementById('wb-progress').innerHTML = "进度：" + vvv;
+        }
+        //获取用户token
+        function getAppUserToken() {
+            var token = WBJSMovieHandle.getUserToken();
+            document.getElementById('wb-token').innerHTML = "token" + token;
+        }
+    </script>
+</body>
+</html>

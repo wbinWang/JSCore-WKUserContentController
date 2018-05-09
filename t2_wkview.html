@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>WKWebView加载html</title>
+    <style>
+        .wb_btn {
+            color: aqua;
+            background: black;
+            font-size: 20px;
+            width: 150px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <p>html调取APP方法</p>
+    <button onclick="callApp('WBWKView','pushMoviePickerCtr',{'min':5.0,'max':999.0})">html自己的js跳转</button>
+    <br>
+    <br>
+    <p>app回调上传进度</p>
+    <div class="wb_btn" onclick="callApp('WBWKView','callBackPreogress','')">我要测试回调</div>
+    <p id="wb-progress">我是上传进度</p>
+    <p>app填充数据</p>
+    <button onclick="showToken()">我需要使用token了</button>
+    <p id="wb-token">我是一个token</p>
+    <script type="text/javascript">
+        var token;
+        //调用app方法
+        function callApp(name , method , param) {
+            var msg = {'method':method,
+                        'param':param};
+            window.webkit.messageHandlers[name].postMessage(msg);
+        }
+        //回调刷新进度
+        function wbProgress(vvv) {  
+            document.getElementById('wb-progress').innerHTML = "进度：" + vvv;
+        }
+        //app填充数据
+        function wbUserToken(t) {
+            token = t;
+        }
+        //展示token
+        function showToken() {
+            document.getElementById('wb-token').innerHTML = 'token:' + token;
+        }
+    </script>
+</body>
+</html>
